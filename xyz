@@ -1,0 +1,114 @@
+local ScreenGui = Instance.new("ScreenGui")
+local main = Instance.new("Frame")
+local top = Instance.new("Frame")
+local xpos = Instance.new("TextLabel")
+local ypos = Instance.new("TextLabel")
+local zpos = Instance.new("TextLabel")
+local xyzposlab = Instance.new("TextLabel")
+local grab = Instance.new("TextButton")
+local clip = Instance.new("TextButton")
+
+ScreenGui.Parent = game.CoreGui
+
+main.Name = "main"
+main.Parent = ScreenGui
+main.BackgroundColor3 = Color3.new(0.184314, 0.184314, 0.184314)
+main.BorderSizePixel = 0
+main.Position = UDim2.new(0.782400012, 0, 0.402860552, 0)
+main.Size = UDim2.new(0, 253, 0, 137)
+main.Active = true
+main.Draggable = true
+
+top.Name = "top"
+top.Parent = main
+top.BackgroundColor3 = Color3.new(0.0980392, 0.0980392, 0.0980392)
+top.BorderSizePixel = 0
+top.Size = UDim2.new(0, 253, 0, 20)
+
+xpos.Name = "xpos"
+xpos.Parent = top
+xpos.BackgroundColor3 = Color3.new(1, 1, 1)
+xpos.BackgroundTransparency = 1
+xpos.Position = UDim2.new(0.0118577071, 0, -3.39999986, 0)
+xpos.Size = UDim2.new(0, 246, 0, 18)
+xpos.Font = Enum.Font.SourceSans
+xpos.Text = "X"
+xpos.TextColor3 = Color3.new(1, 0, 0)
+xpos.TextSize = 14
+xpos.TextXAlignment = Enum.TextXAlignment.Left
+
+ypos.Name = "ypos"
+ypos.Parent = top
+ypos.BackgroundColor3 = Color3.new(1, 1, 1)
+ypos.BackgroundTransparency = 1
+ypos.Position = UDim2.new(0.0118577071, 0, -2.20000005, 0)
+ypos.Size = UDim2.new(0, 246, 0, 18)
+ypos.Font = Enum.Font.SourceSans
+ypos.Text = "Y"
+ypos.TextColor3 = Color3.new(0.231373, 1, 0)
+ypos.TextSize = 14
+ypos.TextXAlignment = Enum.TextXAlignment.Left
+
+zpos.Name = "zpos"
+zpos.Parent = top
+zpos.BackgroundColor3 = Color3.new(1, 1, 1)
+zpos.BackgroundTransparency = 1
+zpos.Position = UDim2.new(0.0118577071, 0, -0.899999857, 0)
+zpos.Size = UDim2.new(0, 246, 0, 18)
+zpos.Font = Enum.Font.SourceSans
+zpos.Text = "Z"
+zpos.TextColor3 = Color3.new(0, 0.317647, 1)
+zpos.TextSize = 14
+zpos.TextXAlignment = Enum.TextXAlignment.Left
+
+xyzposlab.Name = "xyzposlab"
+xyzposlab.Parent = main
+xyzposlab.BackgroundColor3 = Color3.new(0.168627, 0.168627, 0.168627)
+xyzposlab.BorderColor3 = Color3.new(0, 0, 0)
+xyzposlab.Position = UDim2.new(0.0276679844, 0, 0.177914143, 0)
+xyzposlab.Size = UDim2.new(0, 239, 0, 64)
+xyzposlab.Font = Enum.Font.SourceSans
+xyzposlab.Text = "1,1,1"
+xyzposlab.TextColor3 = Color3.new(1, 1, 1)
+xyzposlab.TextSize = 14
+
+grab.Name = "grab"
+grab.Parent = main
+grab.BackgroundColor3 = Color3.new(0.223529, 0.223529, 0.223529)
+grab.BorderColor3 = Color3.new(0, 0, 0)
+grab.Position = UDim2.new(0.0276679844, 0, 0.696968377, 0)
+grab.Size = UDim2.new(0, 115, 0, 33)
+grab.Font = Enum.Font.SourceSans
+grab.Text = "GRABPOS"
+grab.TextColor3 = Color3.new(1, 1, 1)
+grab.TextSize = 14
+
+clip.Name = "clip"
+clip.Parent = main
+clip.BackgroundColor3 = Color3.new(0.223529, 0.223529, 0.223529)
+clip.BorderColor3 = Color3.new(0, 0, 0)
+clip.Position = UDim2.new(0.517786562, 0, 0.696968377, 0)
+clip.Size = UDim2.new(0, 115, 0, 33)
+clip.Font = Enum.Font.SourceSans
+clip.Text = "CLIPBOARD"
+clip.TextColor3 = Color3.new(1, 1, 1)
+clip.TextSize = 14
+-- Scripts:
+grab.MouseButton1Click:Connect(function()
+	xyzposlab.Text = tostring(game.Players.LocalPlayer.Character.HumanoidRootPart.Position)
+    wait(0.25)
+    print(''..tostring(game.Players.LocalPlayer.Character.HumanoidRootPart.Position))
+end)
+
+clip.MouseButton1Click:connect(function()
+	syn.write_clipboard(xyzposlab.Text)
+end)
+
+game:GetService('RunService').RenderStepped:connect(function()
+    local xpose = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame.X 
+    xpos.Text = xpose
+    local ypose = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame.Y
+    ypos.Text = ypose
+    local zpose = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame.Z
+    zpos.Text = zpose
+end)
