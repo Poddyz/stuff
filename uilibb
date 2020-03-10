@@ -10,8 +10,7 @@ local name = Instance.new("TextLabel")
 local close = Instance.new("TextButton")
 --Properties:
 scgui.Name = "scgui"
-scgui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-scgui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+scgui.Parent = game.CoreGui
 
 top.Name = "top"
 top.Parent = scgui
