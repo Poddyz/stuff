@@ -1,0 +1,133 @@
+local Library = {}
+
+function Library:CreateGUI()
+local scgui = Instance.new("ScreenGui")
+local top = Instance.new("Frame")
+local invis = Instance.new("Frame")
+local frame = Instance.new("Frame")
+local UIListLayout = Instance.new("UIListLayout")
+local name = Instance.new("TextLabel")
+local close = Instance.new("TextButton")
+--Properties:
+scgui.Name = "scgui"
+scgui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+scgui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+top.Name = "top"
+top.Parent = scgui
+top.BackgroundColor3 = Color3.new(0.0627451, 0.0627451, 0.0627451)
+top.BorderSizePixel = 0
+top.Position = UDim2.new(0.703199983, 0, 0.35753426, 0)
+top.Size = UDim2.new(0, 209, 0, 26)
+
+invis.Name = "invis"
+invis.Parent = top
+invis.BackgroundColor3 = Color3.new(1, 1, 1)
+invis.BackgroundTransparency = 1
+invis.Position = UDim2.new(0, 0, 1, 0)
+invis.Size = UDim2.new(0, 209, 0, 183)
+invis.ClipsDescendants = true
+
+frame.Name = "frame"
+frame.Parent = invis
+frame.BackgroundColor3 = Color3.new(0.105882, 0.105882, 0.105882)
+frame.BorderSizePixel = 0
+frame.Size = UDim2.new(0, 209, 0, 183)
+
+UIListLayout.Parent = frame
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+UIListLayout.Padding = UDim.new(0, 2)
+
+
+name.Name = "name"
+name.Parent = top
+name.BackgroundColor3 = Color3.new(1, 1, 1)
+name.BackgroundTransparency = 1
+name.Position = UDim2.new(0.0287081338, 0, 0, 0)
+name.Size = UDim2.new(0, 167, 0, 26)
+name.Font = Enum.Font.SourceSans
+name.Text = "Cuzzy"
+name.TextColor3 = Color3.new(1, 1, 1)
+name.TextSize = 14
+name.TextXAlignment = Enum.TextXAlignment.Left
+
+close.Name = "close"
+close.Parent = top
+close.BackgroundColor3 = Color3.new(1, 1, 1)
+close.BackgroundTransparency = 1
+close.Position = UDim2.new(0.875598073, 0, 0, 0)
+close.Size = UDim2.new(0, 26, 0, 26)
+close.Font = Enum.Font.SourceSans
+close.Text = "X"
+close.TextColor3 = Color3.new(1, 1, 1)
+close.TextSize = 16
+close.TextWrapped = true
+
+local dragger = {}; 
+local resizer = {};
+
+
+	local mouse = game:GetService("Players").LocalPlayer:GetMouse();
+	local inputService = game:GetService('UserInputService');
+	local heartbeat = game:GetService("RunService").Heartbeat;
+	-- // credits to Ririchi / Inori for this cute drag function :)
+	function dragger.new(top)
+	    local s, event = pcall(function()
+	    	return top.MouseEnter
+	    end)
+
+	    if s then
+	    	top.Active = true;
+
+	    	event:connect(function()
+	    		local input = top.InputBegan:connect(function(key)
+	    			if key.UserInputType == Enum.UserInputType.MouseButton1 then
+	    				local objectPosition = Vector2.new(mouse.X - top.AbsolutePosition.X, mouse.Y - top.AbsolutePosition.Y);
+	    				while heartbeat:wait() and inputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
+	    					top:TweenPosition(UDim2.new(0, mouse.X - objectPosition.X + (top.Size.X.Offset * top.AnchorPoint.X), 0, mouse.Y - objectPosition.Y + (top.Size.Y.Offset * top.AnchorPoint.Y)), 'Out', 'Quad', 0.1, true);
+	    				end
+	    			end
+	    		end)
+
+	    		local leave;
+	    		leave = top.MouseLeave:connect(function()
+	    			input:disconnect();
+	    			leave:disconnect();
+	    		end)
+	    	end)
+	    end
+	end
+	dragger.new(top)
+
+local topopen = true
+close.MouseButton1Click:connect(function()
+if topopen == true then do
+game:service('TweenService'):Create(top, TweenInfo.new(0.25), {Size = Vector2.new(0, 209,0, 0)}):Play() 
+topopen = false end
+else do
+game:service('TweenService'):Create(top, TweenInfo.new(0.25), {Size = Vector2.new(0, 209, 0, 183)}):Play() 
+topopen = true end
+end
+end)
+
+local LibraryCreate = {}
+
+function LibraryCreate:Button(Name)
+local button = Instance.new("TextButton")
+
+button.Name = Name
+button.Parent = frame
+button.BackgroundColor3 = Color3.new(0.101961, 0.101961, 0.101961)
+button.BorderSizePixel = 0
+button.Size = UDim2.new(0, 209, 0, 22)
+button.Font = Enum.Font.SourceSans
+button.TextColor3 = Color3.new(1, 1, 1)
+button.TextSize = 16
+button.Text = Name
+end
+
+return LibraryCreate;
+
+end
+
+return Library;
