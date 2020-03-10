@@ -114,7 +114,7 @@ local LibraryCreate = {}
 function LibraryCreate:Button(Name, Text)
 local Name = Instance.new("TextButton")
 
-Name.Name = Name
+Name.Name = random.math(111111)
 Name.Parent = frame
 Name.BackgroundColor3 = Color3.new(0.101961, 0.101961, 0.101961)
 Name.BorderSizePixel = 0
