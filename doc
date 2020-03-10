@@ -1,0 +1,11 @@
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Poddyz/stuff/master/uilibb?token=AOXCVLBP3O5YSSZJGHUA5OK6M6RL4"))()
+
+local Main = library:CreateGUI()
+
+Main:Button("YeahCUh")
+Main:Button("It's working cuzzz")
+Main:Button("It's12zzz")
+Main:Button("Itsadking cuzzz")
+YeahCUh.Mouse1ButtonClick:connect(function()
+print"yes"
+end)
