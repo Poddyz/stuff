@@ -10,8 +10,7 @@ local name = Instance.new("TextLabel")
 local close = Instance.new("TextButton")
 --Properties:
 scgui.Name = "scgui"
-scgui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-scgui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+scgui.Parent = game.CoreGui
 
 top.Name = "top"
 top.Parent = scgui
@@ -102,10 +101,10 @@ local resizer = {};
 local topopen = true
 close.MouseButton1Click:connect(function()
 if topopen == true then do
-game:service('TweenService'):Create(top, TweenInfo.new(0.25), {Size = Vector2.new(0, 209,0, 0)}):Play() 
+game:service('TweenService'):Create(top, TweenInfo.new(0.25), {Size = UDim2.new(0, 209,0, 0)}):Play() 
 topopen = false end
 else do
-game:service('TweenService'):Create(top, TweenInfo.new(0.25), {Size = Vector2.new(0, 209, 0, 183)}):Play() 
+game:service('TweenService'):Create(top, TweenInfo.new(0.25), {Size = UDim2.new(0, 209, 0, 183)}):Play() 
 topopen = true end
 end
 end)
