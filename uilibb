@@ -10,7 +10,8 @@ local name = Instance.new("TextLabel")
 local close = Instance.new("TextButton")
 --Properties:
 scgui.Name = "scgui"
-scgui.Parent = game.CoreGui
+scgui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+scgui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 top.Name = "top"
 top.Parent = scgui
@@ -101,28 +102,28 @@ local resizer = {};
 local topopen = true
 close.MouseButton1Click:connect(function()
 if topopen == true then do
-game:service('TweenService'):Create(invis, TweenInfo.new(0.25), {Size = UDim2.new(0, 209,0, 0)}):Play() 
+game:service('TweenService'):Create(top, TweenInfo.new(0.25), {Size = Vector2.new(0, 209,0, 0)}):Play() 
 topopen = false end
 else do
-game:service('TweenService'):Create(invis, TweenInfo.new(0.25), {Size = UDim2.new(0, 209, 0, 183)}):Play() 
+game:service('TweenService'):Create(top, TweenInfo.new(0.25), {Size = Vector2.new(0, 209, 0, 183)}):Play() 
 topopen = true end
 end
 end)
 
 local LibraryCreate = {}
 
-function LibraryCreate:Button(Name)
-local button = Instance.new("TextButton")
+function LibraryCreate:Button(Name, Text)
+local Name = Instance.new("TextButton")
 
-button.Name = Name
-button.Parent = frame
-button.BackgroundColor3 = Color3.new(0.101961, 0.101961, 0.101961)
-button.BorderSizePixel = 0
-button.Size = UDim2.new(0, 209, 0, 22)
-button.Font = Enum.Font.SourceSans
-button.TextColor3 = Color3.new(1, 1, 1)
-button.TextSize = 16
-button.Text = Name
+Name.Name = Name
+Name.Parent = frame
+Name.BackgroundColor3 = Color3.new(0.101961, 0.101961, 0.101961)
+Name.BorderSizePixel = 0
+Name.Size = UDim2.new(0, 209, 0, 22)
+Name.Font = Enum.Font.SourceSans
+Name.TextColor3 = Color3.new(1, 1, 1)
+Name.TextSize = 16
+Name.Text = Text
 end
 
 return LibraryCreate;
@@ -130,3 +131,4 @@ return LibraryCreate;
 end
 
 return Library;
+
